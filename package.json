@@ -1,0 +1,19 @@
+{
+  "name": "todo",
+  "version": "0.1.0",
+  "main": "./src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "nodemon --exec electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Davinder Singh",
+  "license": "ISC",
+  "description": "Creating a personal tool for my day to day tasks, with very simplified UI/UX and interactions.",
+  "devDependencies": {
+    "electron": "^39.1.2",
+    "electron-reloader": "^1.2.3",
+    "nodemon": "^3.1.11"
+  }
+}
