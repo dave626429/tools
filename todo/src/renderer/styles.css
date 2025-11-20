@@ -88,6 +88,8 @@
   align-self: flex-start;
   align-items: center;
   gap: 5px;
+  /* background-color: rgba(43, 43, 43, 0.284); */
+  margin-top: 2px;
 }
 
 .new-task-btn {
@@ -134,7 +136,7 @@
 
 div[contentEditable="true"] {
   font-family: "roboto_condensed";
-  font-size: 12px;
+  font-size: 14px;
   font-style: italic;
   font-weight: 600;
   letter-spacing: 1px;
@@ -142,7 +144,7 @@ div[contentEditable="true"] {
   width: 100%;
   min-width: 0;
   outline: none;
-  color: rgb(77, 77, 77);
+  color: rgb(55, 55, 55);
   background-color: rgba(74, 74, 74, 0.164);
 }
 
