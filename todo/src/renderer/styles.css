@@ -17,6 +17,16 @@
   font-weight: 300;
 }
 
+:root {
+  --title-bar-bg: #121212;
+  --title-bar-text: #ffffff;
+  --hero-bg: yellow;
+  --text: #ffffff;
+  --primary: #4caf50;
+  --radius: 8px;
+  --placeholder: black;
+}
+
 * {
   font-size: 12px;
   font-weight: 600;
@@ -160,4 +170,12 @@ div[contentEditable="true"].empty::before {
   text-decoration: line-through;
   text-decoration-thickness: 2px;
   text-decoration-color: rgb(77, 77, 77);
+}
+
+.delete-btn {
+  width: 16px;
+  aspect-ratio: 1;
+  background-image: url(../../assets/svgs/delete_task.svg);
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
