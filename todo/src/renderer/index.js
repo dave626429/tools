@@ -7,7 +7,6 @@ const generateID = () =>
 
 function createItem() {
   const item = document.createElement("div");
-  item.classList.add("task-item");
 
   const itemOptions = document.createElement("div");
   const addNewTask = document.createElement("div");
@@ -16,28 +15,39 @@ function createItem() {
 
   const childItemContainer = document.createElement("div");
   const textBox = document.createElement("div");
+  textBox.contentEditable = true;
+  textBox.spellcheck = false;
 
   const deleteTaskWrapper = document.createElement("div");
   const deleteTask = document.createElement("div");
-  deleteTask.classList.add("delete-btn");
+
+  item.classList.add("task-item");
 
   itemOptions.classList.add("item-options");
   addNewTask.classList.add("new-task-btn");
   addChildTask.classList.add("child-task-btn");
   checkBox.classList.add("checkBox");
 
-  textBox.contentEditable = true;
-  textBox.spellcheck = false;
+  childItemContainer.classList.add("child-task-container");
   textBox.classList.add("empty");
 
+  deleteTask.classList.add("delete-btn");
+
+  // task's options [add, child and checkbox]
   item.appendChild(itemOptions);
   itemOptions.appendChild(addNewTask);
   itemOptions.appendChild(addChildTask);
   itemOptions.appendChild(checkBox);
-  item.appendChild(textBox);
+
+  // task' text area
+  item.appendChild(childItemContainer);
+  childItemContainer.appendChild(textBox);
+
+  // delete task
   item.appendChild(deleteTaskWrapper);
   deleteTaskWrapper.appendChild(deleteTask);
 
+  // listerners
   item.addEventListener("mouseenter", (e) => {
     addNewTask.style.opacity = 1;
     addChildTask.style.opacity = 1;
@@ -48,12 +58,28 @@ function createItem() {
   });
 
   addNewTask.addEventListener("click", () => {
-    // add new task [completed]
-    if (item.textContent) item.insertAdjacentElement("afterend", createItem());
+    // add new task
+    if (item.textContent) {
+      let newTask = createItem();
+      if (item.hasAttribute("is-child")) newTask.setAttribute("is-child", "");
+      item.insertAdjacentElement("afterend", newTask);
+      return;
+    }
+    textBox.focus();
   });
+
   addChildTask.addEventListener("click", () => {
-    console.log("add-child-task=clicked");
-    // textBox.appendChild(createItem());
+    // add child task
+    if (textBox.textContent) {
+      let childTask = createItem();
+      // childTask.isChild = true; // can not be accessed in css file
+      childTask.setAttribute("is-child", "");
+
+      childItemContainer.appendChild(childTask);
+      return;
+    }
+
+    textBox.focus();
   });
 
   checkBox.addEventListener("click", (e) => {
@@ -104,3 +130,6 @@ function createItem() {
 }
 
 hero.appendChild(createItem());
+// Array(100)
+//   .fill("asdasd")
+//   .forEach(() => hero.appendChild(createItem()));

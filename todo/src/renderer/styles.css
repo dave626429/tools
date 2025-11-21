@@ -42,6 +42,7 @@
   background-color: rgb(233, 233, 0);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 #title-bar {
@@ -63,7 +64,6 @@
 #hero {
   display: flex;
   flex-direction: column;
-  flex: 1;
   background-color: inherit;
   /* border: 2px solid black; */
   margin: 10px;
@@ -91,6 +91,10 @@
   align-items: center;
   gap: 5px;
   /* background-color: rgba(82, 82, 82, 0.421); */
+}
+
+.task-item[is-child] {
+  margin-left: -46px;
 }
 
 .item-options {
@@ -144,6 +148,11 @@
   height: 16px;
 }
 
+.child-task-container {
+  width: 100%;
+  min-width: 0;
+}
+
 div[contentEditable="true"] {
   font-family: "roboto_condensed";
   font-size: 14px;
@@ -152,10 +161,10 @@ div[contentEditable="true"] {
   letter-spacing: 1px;
   border: none;
   width: 100%;
-  min-width: 0;
   outline: none;
   color: rgb(55, 55, 55);
-  background-color: rgba(74, 74, 74, 0.164);
+  /* background-color: rgba(74, 74, 74, 0.164); */
+  position: relative;
 }
 
 div[contentEditable="true"].empty::before {
