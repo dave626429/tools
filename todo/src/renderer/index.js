@@ -7,7 +7,6 @@ const generateID = () =>
 
 function createItem() {
   const item = document.createElement("div");
-  // item.id = generateID();
   item.classList.add("task-item");
 
   const itemOptions = document.createElement("div");
@@ -17,6 +16,10 @@ function createItem() {
 
   const childItemContainer = document.createElement("div");
   const textBox = document.createElement("div");
+
+  const deleteTaskWrapper = document.createElement("div");
+  const deleteTask = document.createElement("div");
+  deleteTask.classList.add("delete-btn");
 
   itemOptions.classList.add("item-options");
   addNewTask.classList.add("new-task-btn");
@@ -32,6 +35,8 @@ function createItem() {
   itemOptions.appendChild(addChildTask);
   itemOptions.appendChild(checkBox);
   item.appendChild(textBox);
+  item.appendChild(deleteTaskWrapper);
+  deleteTaskWrapper.appendChild(deleteTask);
 
   item.addEventListener("mouseenter", (e) => {
     addNewTask.style.opacity = 1;
@@ -52,8 +57,10 @@ function createItem() {
   });
 
   checkBox.addEventListener("click", (e) => {
-    checkBox.classList.toggle("checked");
-    textBox.classList.toggle("strike");
+    if (textBox.textContent) {
+      checkBox.classList.toggle("checked");
+      textBox.classList.toggle("strike");
+    }
   });
 
   textBox.addEventListener("input", (e) => {
@@ -79,6 +86,18 @@ function createItem() {
 
     // Insert plain text at cursor
     document.execCommand("insertText", false, text);
+  });
+
+  deleteTask.addEventListener("click", (e) => {
+    let itemParent = deleteTask.parentNode.parentNode.parentNode;
+    console.log(itemParent.childNodes.length > 1);
+
+    if (itemParent.childNodes.length > 1) {
+      console.log("deleted");
+      itemParent.removeChild(item);
+    } else {
+      item.replaceWith(createItem());
+    }
   });
 
   return item;
