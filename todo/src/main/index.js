@@ -1,15 +1,14 @@
-const { app, BrowserWindow } = require("electron/main");
+const { app } = require("electron/main");
 const enableHotReloading = require("../utils/hot-reloader.js");
+const createWindow = require("../utils/window-controls.js");
+const path = require("node:path");
 
 enableHotReloading();
 
-const createWindow = () => {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-  });
-
-  win.loadFile("./src/renderer/index.html");
-};
-
-app.whenReady().then(() => createWindow());
+(async () => {
+  await app.whenReady();
+  createWindow(
+    "./src/renderer/index.html",
+    path.join(__dirname, "./preload.js")
+  );
+})();
