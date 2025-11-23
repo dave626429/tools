@@ -1,9 +1,11 @@
+const minimizeWindow = document.querySelector("#minimize");
+const maximizeRestoreWindow = document.querySelector("#maximize-restore");
+const closeWindow = document.querySelector("#close");
+
 const hero = document.querySelector("#hero");
 
-const tasks = [];
-
 const generateID = () =>
-  Date.now() + "-" + Math.random().toString(36).substr(2, 10);
+  Date.now() + "-" + Math.random().toString(36).substring(2, 10);
 
 function createItem() {
   const item = document.createElement("div");
@@ -65,6 +67,7 @@ function createItem() {
       item.insertAdjacentElement("afterend", newTask);
       return;
     }
+
     textBox.focus();
   });
 
@@ -130,6 +133,11 @@ function createItem() {
 }
 
 hero.appendChild(createItem());
+
+minimizeWindow.addEventListener("click", () => {
+  console.log(window.windowControls);
+  window.windowControls.minimize();
+});
 // Array(100)
 //   .fill("asdasd")
 //   .forEach(() => hero.appendChild(createItem()));

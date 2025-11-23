@@ -61,12 +61,50 @@
   font-family: "roboto_condensed";
 }
 
+#title-bar-options {
+  display: flex;
+  gap: 5px;
+}
+
+.title-option {
+  width: 14px;
+  aspect-ratio: 1;
+  border: 1px solid black;
+  border-radius: 999px;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.title-option:hover {
+  opacity: 1;
+}
+
+#minimize {
+  background-color: rgb(222, 229, 0);
+  border-color: rgb(255, 255, 255);
+}
+
+#maximize-restore {
+  background-color: rgb(68, 173, 19);
+  border-color: rgb(159, 226, 132);
+}
+
+#maximize-restore[restore] {
+  background-color: rgb(53, 124, 199);
+  border-color: rgb(112, 180, 253);
+}
+
+#close {
+  background-color: rgb(221, 70, 70);
+  border-color: rgb(255, 131, 131);
+}
+
 #hero {
   display: flex;
   flex-direction: column;
   background-color: inherit;
   /* border: 2px solid black; */
-  margin: 10px;
+  margin: 10px 5px;
   gap: 5px;
   overflow-x: hidden;
   overflow-y: auto; /* allow vertical scroll only */
