@@ -1,6 +1,11 @@
+const fullscreenWindow = document.querySelector("#fullscreen");
 const minimizeWindow = document.querySelector("#minimize");
+
 const maximizeRestoreWindow = document.querySelector("#maximize-restore");
+maximizeRestoreWindow.setAttribute("restore", "");
+
 const closeWindow = document.querySelector("#close");
+const titleBar = document.querySelector("#title-bar");
 
 const hero = document.querySelector("#hero");
 
@@ -134,10 +139,73 @@ function createItem() {
 
 hero.appendChild(createItem());
 
-minimizeWindow.addEventListener("click", () => {
-  console.log(window.windowControls);
-  window.windowControls.minimize();
-});
 // Array(100)
 //   .fill("asdasd")
 //   .forEach(() => hero.appendChild(createItem()));
+
+titleBar.addEventListener("dblclick", () => {
+  if (fullscreenWindow.hasAttribute("full")) return;
+  maximizeRestoreWindow.click();
+});
+
+fullscreenWindow.addEventListener("click", () => {
+  window.windowControls.togglefullscreen();
+});
+
+minimizeWindow.addEventListener("click", () => {
+  window.windowControls.minimize();
+});
+
+closeWindow.addEventListener("click", () => {
+  window.windowControls.close();
+});
+
+maximizeRestoreWindow.addEventListener("click", () => {
+  if (fullscreenWindow.hasAttribute("full")) return;
+
+  maximizeRestoreWindow.toggleAttribute("restore");
+
+  maximizeRestoreWindow.hasAttribute("restore")
+    ? window.windowControls.restore()
+    : window.windowControls.maximize();
+});
+
+window.addEventListener("blur", () => {
+  minimizeWindow.setAttribute("blur", "");
+});
+
+window.addEventListener("mouseover", () => {
+  minimizeWindow.removeAttribute("blur");
+});
+
+window.addEventListener("resize", () => {
+  let dy = screen.height - window.innerHeight;
+
+  console.log(
+    window.outerWidth,
+    screen.width,
+    window.outerHeight,
+    window.innerHeight,
+    screen.height
+  );
+
+  if (
+    window.innerWidth === screen.width &&
+    window.innerHeight === screen.height
+  ) {
+    fullscreenWindow.setAttribute("full", "");
+  } else {
+    fullscreenWindow.removeAttribute("full", "");
+  }
+
+  if (fullscreenWindow.hasAttribute("full")) return;
+
+  if (
+    window.outerWidth === screen.width &&
+    window.outerHeight + dy === screen.height
+  ) {
+    maximizeRestoreWindow.removeAttribute("restore");
+  } else {
+    maximizeRestoreWindow.setAttribute("restore", "");
+  }
+});

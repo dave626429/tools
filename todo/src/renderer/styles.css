@@ -52,6 +52,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  -webkit-app-region: drag;
+  user-select: none;
 }
 
 #title-bar > p {
@@ -66,6 +69,31 @@
   gap: 5px;
 }
 
+#fullscreen {
+  width: 14px;
+  aspect-ratio: 1;
+  background-color: white;
+  transition: background-color 0.1s ease-in-out;
+
+  -webkit-mask: url("../../assets/svgs/fullscreen.svg") no-repeat center /
+    contain;
+  mask: url("../../assets/svgs/fullscreen.svg") no-repeat center / contain;
+  border: none;
+  cursor: pointer;
+
+  -webkit-app-region: no-drag;
+}
+
+#fullscreen[full] {
+  -webkit-mask: url("../../assets/svgs/exit_fullscreen.svg") no-repeat center /
+    contain;
+  mask: url("../../assets/svgs/exit_fullscreen.svg") no-repeat center / contain;
+}
+
+#fullscreen:hover {
+  background-color: rgb(0, 217, 255);
+}
+
 .title-option {
   width: 14px;
   aspect-ratio: 1;
@@ -73,30 +101,37 @@
   border-radius: 999px;
   opacity: 0.7;
   cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
+
+  -webkit-app-region: no-drag;
 }
 
 .title-option:hover {
   opacity: 1;
 }
 
-#minimize {
-  background-color: rgb(222, 229, 0);
-  border-color: rgb(255, 255, 255);
+.title-option[blur]:hover {
+  opacity: 0.7 !important;
 }
 
-#maximize-restore {
-  background-color: rgb(68, 173, 19);
-  border-color: rgb(159, 226, 132);
+#minimize {
+  background-color: #f4c542;
+  border-color: #f9e8a0;
 }
 
 #maximize-restore[restore] {
-  background-color: rgb(53, 124, 199);
-  border-color: rgb(112, 180, 253);
+  background-color: #4cc36f;
+  border-color: #a7e6bf;
+}
+
+#maximize-restore {
+  background-color: #4a90e2;
+  border-color: #a9ccf7;
 }
 
 #close {
-  background-color: rgb(221, 70, 70);
-  border-color: rgb(255, 131, 131);
+  background-color: #e74c3c;
+  border-color: #f5a3a3;
 }
 
 #hero {
@@ -222,7 +257,7 @@ div[contentEditable="true"].empty::before {
 .delete-btn {
   width: 16px;
   aspect-ratio: 1;
-  background-image: url(../../assets/svgs/delete_task.svg);
+  background-image: url("../../assets/svgs/delete_task.svg");
   background-repeat: no-repeat;
   cursor: pointer;
 }
