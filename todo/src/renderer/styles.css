@@ -226,6 +226,12 @@
   min-width: 0;
 }
 
+.text-box-delete-btn-wrapper {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
 div[contentEditable="true"] {
   font-family: "roboto_condensed";
   font-size: 14px;
@@ -233,11 +239,13 @@ div[contentEditable="true"] {
   font-weight: 600;
   letter-spacing: 1px;
   border: none;
-  width: 100%;
+  flex: 1;
   outline: none;
   color: rgb(55, 55, 55);
   /* background-color: rgba(74, 74, 74, 0.164); */
   position: relative;
+
+  min-width: 0;
 }
 
 div[contentEditable="true"].empty::before {
@@ -260,4 +268,6 @@ div[contentEditable="true"].empty::before {
   background-image: url("../../assets/svgs/delete_task.svg");
   background-repeat: no-repeat;
   cursor: pointer;
+  flex-shrink: 0;
+  align-self: flex-start;
 }

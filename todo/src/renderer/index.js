@@ -21,11 +21,13 @@ function createItem() {
   const checkBox = document.createElement("div");
 
   const childItemContainer = document.createElement("div");
+
+  // input + delete-btn
+  const textBoxWrapper = document.createElement("div");
+  textBoxWrapper.classList.add("text-box-delete-btn-wrapper");
   const textBox = document.createElement("div");
   textBox.contentEditable = true;
   textBox.spellcheck = false;
-
-  const deleteTaskWrapper = document.createElement("div");
   const deleteTask = document.createElement("div");
 
   item.classList.add("task-item");
@@ -46,15 +48,15 @@ function createItem() {
   itemOptions.appendChild(addChildTask);
   itemOptions.appendChild(checkBox);
 
-  // task' text area
+  // task
   item.appendChild(childItemContainer);
-  childItemContainer.appendChild(textBox);
+  childItemContainer.appendChild(textBoxWrapper);
+  textBoxWrapper.appendChild(textBox);
+  textBoxWrapper.appendChild(deleteTask);
 
-  // delete task
-  item.appendChild(deleteTaskWrapper);
-  deleteTaskWrapper.appendChild(deleteTask);
-
-  // listerners
+  /**
+   * listerners
+   */
   item.addEventListener("mouseenter", (e) => {
     addNewTask.style.opacity = 1;
     addChildTask.style.opacity = 1;
@@ -123,11 +125,11 @@ function createItem() {
   });
 
   deleteTask.addEventListener("click", (e) => {
-    let itemParent = deleteTask.parentNode.parentNode.parentNode;
+    let itemParent = deleteTask.parentNode.parentNode.parentNode.parentNode;
+    console.log(itemParent);
     console.log(itemParent.childNodes.length > 1);
 
     if (itemParent.childNodes.length > 1) {
-      console.log("deleted");
       itemParent.removeChild(item);
     } else {
       item.replaceWith(createItem());
@@ -139,10 +141,9 @@ function createItem() {
 
 hero.appendChild(createItem());
 
-// Array(100)
-//   .fill("asdasd")
-//   .forEach(() => hero.appendChild(createItem()));
-
+/**
+ * Global Listeners.
+ */
 titleBar.addEventListener("dblclick", () => {
   if (fullscreenWindow.hasAttribute("full")) return;
   maximizeRestoreWindow.click();
@@ -180,14 +181,6 @@ window.addEventListener("mouseover", () => {
 
 window.addEventListener("resize", () => {
   let dy = screen.height - window.innerHeight;
-
-  console.log(
-    window.outerWidth,
-    screen.width,
-    window.outerHeight,
-    window.innerHeight,
-    screen.height
-  );
 
   if (
     window.innerWidth === screen.width &&
